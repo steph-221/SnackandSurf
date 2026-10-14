@@ -5,6 +5,7 @@ import subprocess
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key_snack_surf'
+
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_FILE = os.path.join(BASE_DIR, 'snack_menu.db')
 
@@ -14,42 +15,49 @@ def get_db_connection():
     return conn
 
 def init_db():
-    try:
-        conn = get_db_connection()
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS menu (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                categorie TEXT NOT NULL,
-                nom TEXT NOT NULL,
-                prix TEXT NOT NULL,
-                description TEXT
-            )
-        ''')
-        cursor = conn.cursor()
-        cursor.execute('SELECT COUNT(*) FROM menu')
-        if cursor.fetchone()[0] == 0:
-            plats = [("Burgers", "Classic Surf Burger", "4 000 FCFA", "Boeuf, cheddar, salade, tomate."), ("Boissons", "Smoothie Tropical", "2 500 FCFA", "Mangue, ananas, passion.")]
-            cursor.executemany('INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', plats)
-            conn.commit()
-        conn.close()
-    except Exception as e:
-        print(f"Erreur init_db: {e}")
+    conn = get_db_connection()
+    conn.execute('''
+        CREATE TABLE IF NOT EXISTS menu (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            categorie TEXT NOT NULL,
+            nom TEXT NOT NULL,
+            prix TEXT NOT NULL,
+            description TEXT
+        )
+    ''')
+    cursor = conn.cursor()
+    cursor.execute('SELECT COUNT(*) FROM menu')
+    if cursor.fetchone()[0] == 0:
+        plats = [
+            ("Burgers", "Classic Surf Burger", "4 000 FCFA", "Boeuf, cheddar, salade, tomate."),
+            ("Boissons", "Smoothie Tropical", "2 500 FCFA", "Mangue, ananas, passion.")
+        ]
+        cursor.executemany('INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', plats)
+        conn.commit()
+    conn.close()
 
 init_db()
 
 @app.route('/')
-def accueil(): return render_template('index.html')
+def accueil(): 
+    return render_template('index.html')
 
 @app.route('/api/menu')
 def get_menu():
     conn = get_db_connection()
-    plats = conn.execute('SELECT * FROM menu').fetchall()
+    plats = conn.execute('SELECT * FROM menu ORDER BY categorie').fetchall()
     conn.close()
     menu = {}
     for p in plats:
         cat = p['categorie']
-        if cat not in menu: menu[cat] = {"categorie": cat, "items": []}
-        menu[cat]["items"].append({"id": p['id'], "nom": p['nom'], "prix": p['prix'], "desc": p['description']})
+        if cat not in menu: 
+            menu[cat] = {"categorie": cat, "items": []}
+        menu[cat]["items"].append({
+            "id": p['id'], 
+            "nom": p['nom'], 
+            "prix": p['prix'], 
+            "desc": p['description']
+        })
     return jsonify(list(menu.values()))
 
 @app.route('/admin', methods=['GET', 'POST'])
@@ -68,16 +76,21 @@ def admin():
 
 @app.route('/admin/ajouter', methods=['POST'])
 def admin_ajouter():
-    if 'admin_logged_in' not in session: return redirect(url_for('admin'))
+    if 'admin_logged_in' not in session: 
+        return redirect(url_for('admin'))
     conn = get_db_connection()
-    conn.execute('INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', (request.form['categorie'], request.form['nom'], request.form['prix'], request.form['description']))
+    conn.execute(
+        'INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', 
+        (request.form['categorie'], request.form['nom'], request.form['prix'], request.form['description'])
+    )
     conn.commit()
     conn.close()
     return redirect(url_for('admin'))
 
 @app.route('/admin/supprimer/<int:id>', methods=['POST'])
 def admin_supprimer(id):
-    if 'admin_logged_in' not in session: return redirect(url_for('admin'))
+    if 'admin_logged_in' not in session: 
+        return redirect(url_for('admin'))
     conn = get_db_connection()
     conn.execute('DELETE FROM menu WHERE id = ?', (id,))
     conn.commit()
@@ -91,10 +104,10 @@ def admin_logout():
 
 @app.route('/deploy', methods=['POST'])
 def auto_deploy():
-    if request.args.get('token') != 'surf_secret_almadies_2026': from flask import abort; abort(403)
+    if request.args.get('token') != 'surf_secret_almadies_2026': 
+        from flask import abort
+        abort(403)
     subprocess.run(['git', '-C', '/home/snackandsurf/SnackandSurf', 'pull'], check=True)
-    if os.path.exists('/var/www/snackandsurf_pythonanywhere_com_wsgi.py'): os.utime('/var/www/snackandsurf_pythonanywhere_com_wsgi.py', None)
-    return 'Site mis a jour avec succes !', 200
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    if os.path.exists('/var/www/snackandsurf_pythonanywhere_com_wsgi.py'): 
+        os.utime('/var/www/snackandsurf_pythonanywhere_com_wsgi.py', None)
+    return 'Site mis a jour', 200
