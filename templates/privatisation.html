@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privatisation - Snack & Surf Almadies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --senegal-green: #00853F;
+            --senegal-yellow: #FDEF42;
+            --senegal-red: #E31B23;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #80deea 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        .main-title { font-family: 'Permanent Marker', cursive; text-shadow: 2px 2px 0px var(--senegal-green); color: var(--senegal-red); }
+        .card {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 133, 63, 0.15);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #fff;
+        }
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 12px;
+            background: repeating-linear-gradient(90deg, var(--senegal-green), var(--senegal-green) 33.3%, var(--senegal-yellow) 33.3%, var(--senegal-yellow) 66.6%, var(--senegal-red) 66.6%, var(--senegal-red) 100%);
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8 flex flex-col items-center justify-center min-h-screen">
+
+    <div class="fixed top-4 left-4 z-50 flex gap-2">
+        <a href="/" class="bg-gray-800 text-white text-xs font-bold px-3 py-2 rounded opacity-75 hover:opacity-100 transition shadow">← La Carte</a>
+    </div>
+
+    <div class="text-center mb-6 mt-12 sm:mt-4">
+        <h1 class="main-title text-4xl sm:text-5xl font-extrabold tracking-wider">PRIVATISATION</h1>
+        <p class="text-gray-700 font-semibold mt-2">Organisez votre événement face à l'océan aux Almadies</p>
+    </div>
+
+    <div class="card max-w-xl w-full p-6 sm:p-8">
+        {% if succes %}
+        <div class="bg-emerald-50 border-2 border-emerald-500 rounded-xl p-6 text-center mb-6 animate-fade-in">
+            <span class="text-4xl">🎉</span>
+            <h2 class="text-xl font-bold text-emerald-800 mt-2">Demande envoyée avec succès !</h2>
+            <p class="text-emerald-700 text-sm mt-1">
+                Merci ! Notre équipe a bien reçu votre demande de privatisation et vous recontactera sous peu.
+            </p>
+            <a href="/" class="inline-block mt-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase px-5 py-2.5 rounded-full transition shadow">
+                Retour à la carte
+            </a>
+        </div>
+        {% endif %}
+
+        <form action="/privatisation" method="POST" class="space-y-4">
+            <div>
+                <label for="nom" class="block text-xs font-bold text-gray-700 uppercase mb-1">Nom complet ou Entreprise</label>
+                <input type="text" id="nom" name="nom" required placeholder="ex: Awa Ndiaye"
+                    class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm bg-white">
+            </div>
+
+            <div>
+                <label for="email" class="block text-xs font-bold text-gray-700 uppercase mb-1">Contact (Email ou Téléphone / WhatsApp)</label>
+                <input type="text" id="email" name="email" required placeholder="ex: +221 77 ... ou contact@..."
+                    class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm bg-white">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label for="date" class="block text-xs font-bold text-gray-700 uppercase mb-1">Date souhaitée</label>
+                    <input type="date" id="date" name="date" required
+                        class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm bg-white">
+                </div>
+
+                <div>
+                    <label for="personnes" class="block text-xs font-bold text-gray-700 uppercase mb-1">Nombre de personnes</label>
+                    <input type="number" id="personnes" name="personnes" min="1" required placeholder="ex: 25"
+                        class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm bg-white">
+                </div>
+            </div>
+
+            <div>
+                <label for="type" class="block text-xs font-bold text-gray-700 uppercase mb-1">Type d'événement</label>
+                <select id="type" name="type" required
+                    class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm bg-white">
+                    <option value="Anniversaire">🎂 Anniversaire</option>
+                    <option value="Soirée d'entreprise / Team Building">🏢 Soirée d'entreprise / Team Building</option>
+                    <option value="Session Surf & Chill">🏄‍♂️ Session Surf & Chill</option>
+                    <option value="Fête privée / Soirée entre amis">🎉 Fête privée / Soirée entre amis</option>
+                    <option value="Autre événement">✨ Autre événement</option>
+                </select>
+            </div>
+
+            <button type="submit"
+                class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-md hover:shadow-lg transition text-sm uppercase tracking-wide">
+                Envoyer ma demande de privatisation
+            </button>
+        </form>
+
+        <div class="mt-6 pt-4 border-t border-gray-200 text-center">
+            <p class="text-xs text-gray-500">
+                Vous préférez échanger directement ?
+                <a href="https://wa.me/221710579371?text=Bonjour%20Snack%20%26%20Surf%2C%20je%20souhaite%20des%20informations%20pour%20une%20privatisation%20!"
+                    target="_blank" class="text-emerald-600 font-bold hover:underline">
+                    Écrivez-nous sur WhatsApp
+                </a>
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>
