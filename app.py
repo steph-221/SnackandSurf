@@ -90,4 +90,7 @@ def auto_deploy():
     if request.args.get('token') != 'surf_secret_almadies_2026': from flask import abort; abort(403)
     subprocess.run(['git', '-C', '/home/snackandsurf/SnackandSurf', 'pull'], check=True)
     if os.path.exists('/var/www/snackandsurf_pythonanywhere_com_wsgi.py'): os.utime('/var/www/snackandsurf_pythonanywhere_com_wsgi.py', None)
-    return 'Site mis à jour', 200
+    return 'Site mis a jour avec succes !', 200
+
+if __name__ == '__main__':
+    app.run(debug=True)
