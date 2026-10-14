@@ -4,7 +4,7 @@ import os
 import subprocess
 from datetime import datetime
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 app.secret_key = 'super_secret_key_snack_surf'
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -17,11 +17,11 @@ def get_db_connection():
 
 @app.route('/sitemap.xml')
 def sitemap():
-    return send_from_directory(app.root_path, 'sitemap.xml', mimetype='application/xml')
+    return send_from_directory(app.static_folder, 'sitemap.xml')
 
 @app.route('/robots.txt')
 def robots():
-    return send_from_directory(app.root_path, 'robots.txt', mimetype='text/plain')
+    return send_from_directory(app.static_folder, 'robots.txt')
 
 @app.route('/')
 def accueil(): 
