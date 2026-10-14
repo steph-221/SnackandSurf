@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+ï»¿<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Snack & Surf - Édition Teranga</title>
+    <title>Menu Snack & Surf - Edition Teranga</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,13 +28,12 @@
         .sub-title { font-family: 'Permanent Marker', cursive; color: var(--senegal-green); letter-spacing: 1px; }
         .card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 1.5rem; box-shadow: 0 10px 25px rgba(0, 133, 63, 0.15); padding: 2rem 1.5rem; margin: 2rem auto; max-width: 750px; border: 2px solid #fff; position: relative; overflow: hidden; }
         .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px; background: repeating-linear-gradient(90deg, var(--senegal-green), var(--senegal-green) 33.3%, var(--senegal-yellow) 33.3%, var(--senegal-yellow) 66.6%, var(--senegal-red) 66.6%, var(--senegal-red) 100%); background-size: 100% 100%; }
-        .section-title { font-family: 'Permanent Marker', cursive; position: relative; color: var(--senegal-green); font-size: 2rem; padding-bottom: 1rem; display: flex; align-items: center; justify-content: center; margin-top: 2rem;}
-        .section-title svg { margin-right: 0.75rem; color: var(--senegal-red); width: 32px; height: 32px; }
+        .section-title { font-family: 'Permanent Marker', cursive; position: relative; color: var(--senegal-green); font-size: 2rem; padding-bottom: 1rem; display: flex; align-items: center; justify-content: center; margin-top: 2rem; }
         .section-title::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 80px; height: 4px; background-color: var(--senegal-yellow); border-radius: 2px; box-shadow: 0 2px 0 var(--senegal-red); }
-        .menu-item-block { padding-top: 0.75rem; margin-bottom: 0; border-bottom: 1px dashed #ccc; opacity: 1; }
-        .item-row { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 0; padding-bottom: 0; padding-top: 0; border-bottom: none; }
+        .menu-item-block { padding-top: 0.75rem; margin-bottom: 0; border-bottom: 1px dashed #ccc; }
+        .item-row { display: flex; justify-content: space-between; align-items: flex-end; }
         .item-name-dots { display: flex; flex-grow: 1; overflow: hidden; align-items: flex-end; }
-        .dots-separator { flex-grow: 1; min-width: 10px; margin: 0 0.5rem 0 0.5rem; border-bottom: 2px dotted #aaa; height: 1em; }
+        .dots-separator { flex-grow: 1; min-width: 10px; margin: 0 0.5rem; border-bottom: 2px dotted #aaa; height: 1em; }
         .item-name { font-weight: 700; color: #222; font-size: 1.1rem; line-height: 1.4; display: block; flex-shrink: 1; }
         .item-price { font-family: 'Permanent Marker', cursive; color: var(--senegal-red); font-size: 1.25rem; flex-shrink: 0; margin-left: 1rem; }
         .item-ingredients { color: var(--text-muted); font-style: italic; font-size: 0.9rem; margin-top: 0.25rem; margin-bottom: 0.75rem; padding-left: 0.5rem; line-height: 1.3; }
@@ -44,27 +43,92 @@
 <body class="p-4 sm:p-8">
 
     <div class="fixed top-4 left-4 z-50 flex gap-2">
-        <a href="/admin" class="bg-gray-800 text-white text-xs font-bold px-3 py-2 rounded opacity-50 hover:opacity-100 transition">?? Admin</a>
-        <a href="/privatisation" class="bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded shadow-md">?? Privatiser le lieu</a>
+        <a href="/admin" class="bg-gray-800 text-white text-xs font-bold px-3 py-2 rounded opacity-50 hover:opacity-100 transition">Admin</a>
+        <a href="/privatisation" class="bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded shadow-md">Privatiser</a>
     </div>
 
     <div class="text-center mb-6 mt-8">
-        <h1 class="main-title text-5xl sm:text-6xl font-extrabold tracking-wider relative inline-block">LA CARTE<span style="color: var(--senegal-yellow); position: absolute; top: -10px; right: -20px; text-shadow: 1px 1px 0 #000;">?</span></h1>
+        <h1 class="main-title text-5xl sm:text-6xl font-extrabold tracking-wider relative inline-block">LA CARTE</h1>
     </div>
 
     <div class="card">
         <div class="w-full flex justify-center mb-8 pt-4">
-            <img src="https://drive.google.com/thumbnail?id=1ffuCBqJBhUMZF1akm5_CL7_txgfaJF2m&sz=w1000" alt="Logo Snack & Surf" class="max-w-[250px] sm:max-w-[300px] h-auto drop-shadow-md transform hover:scale-105 transition duration-300">
+            <img src="https://drive.google.com/thumbnail?id=1ffuCBqJBhUMZF1akm5_CL7_txgfaJF2m&sz=w1000" alt="Logo Snack & Surf" class="max-w-[250px] sm:max-w-[300px] h-auto drop-shadow-md">
         </div>
 
         <div id="dynamic-menu-container"></div>
 
-        <div class="w-full mt-12 mb-6 rounded-xl overflow-hidden shadow-lg border-4 border-white transform hover:rotate-1 transition duration-500">
-            <img src="https://drive.google.com/thumbnail?id=1SJEYqCftp8I90e15AeBH2guhAsDHwh3x&sz=w1000" alt="Snack & Surf Façade" class="w-full h-auto object-cover">
+        <div class="w-full mt-12 mb-6 rounded-xl overflow-
+
+$Utf8 = [System.Text.Encoding]::UTF8
+
+$indexHtml = @'
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Snack & Surf - Edition Teranga</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --senegal-green: #00853F;
+            --senegal-yellow: #FDEF42;
+            --senegal-red: #E31B23;
+            --ocean-blue: #48CAE4;
+            --text-dark: #1a1a1a;
+            --text-muted: #555555;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa 0%, #80deea 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--text-dark);
+        }
+        .main-title { font-family: 'Permanent Marker', cursive; text-shadow: 2px 2px 0px var(--senegal-green); color: var(--senegal-red); transform: rotate(-2deg); }
+        .sub-title { font-family: 'Permanent Marker', cursive; color: var(--senegal-green); letter-spacing: 1px; }
+        .card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 1.5rem; box-shadow: 0 10px 25px rgba(0, 133, 63, 0.15); padding: 2rem 1.5rem; margin: 2rem auto; max-width: 750px; border: 2px solid #fff; position: relative; overflow: hidden; }
+        .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px; background: repeating-linear-gradient(90deg, var(--senegal-green), var(--senegal-green) 33.3%, var(--senegal-yellow) 33.3%, var(--senegal-yellow) 66.6%, var(--senegal-red) 66.6%, var(--senegal-red) 100%); background-size: 100% 100%; }
+        .section-title { font-family: 'Permanent Marker', cursive; position: relative; color: var(--senegal-green); font-size: 2rem; padding-bottom: 1rem; display: flex; align-items: center; justify-content: center; margin-top: 2rem; }
+        .section-title::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 80px; height: 4px; background-color: var(--senegal-yellow); border-radius: 2px; box-shadow: 0 2px 0 var(--senegal-red); }
+        .menu-item-block { padding-top: 0.75rem; margin-bottom: 0; border-bottom: 1px dashed #ccc; }
+        .item-row { display: flex; justify-content: space-between; align-items: flex-end; }
+        .item-name-dots { display: flex; flex-grow: 1; overflow: hidden; align-items: flex-end; }
+        .dots-separator { flex-grow: 1; min-width: 10px; margin: 0 0.5rem; border-bottom: 2px dotted #aaa; height: 1em; }
+        .item-name { font-weight: 700; color: #222; font-size: 1.1rem; line-height: 1.4; display: block; flex-shrink: 1; }
+        .item-price { font-family: 'Permanent Marker', cursive; color: var(--senegal-red); font-size: 1.25rem; flex-shrink: 0; margin-left: 1rem; }
+        .item-ingredients { color: var(--text-muted); font-style: italic; font-size: 0.9rem; margin-top: 0.25rem; margin-bottom: 0.75rem; padding-left: 0.5rem; line-height: 1.3; }
+        @media (max-width: 640px) { .section-title { font-size: 1.75rem; } }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="fixed top-4 left-4 z-50 flex gap-2">
+        <a href="/admin" class="bg-gray-800 text-white text-xs font-bold px-3 py-2 rounded opacity-50 hover:opacity-100 transition">Admin</a>
+        <a href="/privatisation" class="bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded shadow-md">Privatiser</a>
+    </div>
+
+    <div class="text-center mb-6 mt-8">
+        <h1 class="main-title text-5xl sm:text-6xl font-extrabold tracking-wider relative inline-block">LA CARTE</h1>
+    </div>
+
+    <div class="card">
+        <div class="w-full flex justify-center mb-8 pt-4">
+            <img src="https://drive.google.com/thumbnail?id=1ffuCBqJBhUMZF1akm5_CL7_txgfaJF2m&sz=w1000" alt="Logo Snack & Surf" class="max-w-[250px] sm:max-w-[300px] h-auto drop-shadow-md">
+        </div>
+
+        <div id="dynamic-menu-container"></div>
+
+        <div class="w-full mt-12 mb-6 rounded-xl overflow-hidden shadow-lg border-4 border-white">
+            <img src="https://drive.google.com/thumbnail?id=1SJEYqCftp8I90e15AeBH2guhAsDHwh3x&sz=w1000" alt="Snack & Surf Facade" class="w-full h-auto object-cover">
         </div>
 
         <div class="text-center pt-4 border-t-2 border-dashed" style="border-color: var(--senegal-red);">
-            <p class="text-sm mt-1 font-bold tracking-wider uppercase" style="color: var(--senegal-green);">Commande au Comptoir ??</p>
+            <p class="text-sm mt-1 font-bold tracking-wider uppercase" style="color: var(--senegal-green);">Commande au Comptoir</p>
         </div>
     </div>
 
@@ -79,12 +143,12 @@
             fetch('/api/menu').then(response => response.json()).then(data => {
                 const container = document.getElementById('dynamic-menu-container');
                 data.forEach(categorie => {
-                    let html = <div class="text-center mb-8"><h2 class="section-title uppercase">+categorie.categorie+</h2><div class="space-y-2">;
+                    let html = `<div class="text-center mb-8"><h2 class="section-title uppercase">`+categorie.categorie+`</h2><div class="space-y-2">`;
                     categorie.items.forEach(item => {
-                        let descHtml = item.desc ? <p class="item-ingredients text-left bg-[#fffde7] border-l-4 border-[#FDEF42] p-2 mt-1 mb-2 rounded-r">+item.desc+</p> : '';
-                        html += <div class="menu-item-block"><div class="item-row"><div class="item-name-dots"><span class="item-name uppercase">+item.nom+</span><div class="dots-separator"></div></div><span class="item-price">+item.prix+</span></div>+descHtml+</div>;
+                        let descHtml = item.desc ? `<p class="item-ingredients text-left bg-[#fffde7] border-l-4 border-[#FDEF42] p-2 mt-1 mb-2 rounded-r">`+item.desc+`</p>` : '';
+                        html += `<div class="menu-item-block"><div class="item-row"><div class="item-name-dots"><span class="item-name uppercase">`+item.nom+`</span><div class="dots-separator"></div></div><span class="item-price">`+item.prix+`</span></div>`+descHtml+`</div>`;
                     });
-                    html += </div></div>;
+                    html += `</div></div>`;
                     container.innerHTML += html;
                 });
             });
