@@ -3,12 +3,60 @@ import sqlite3
 import os
 import subprocess
 from datetime import datetime
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 app = Flask(__name__, static_folder='static')
 app.secret_key = 'super_secret_key_snack_surf'
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_FILE = os.path.join(BASE_DIR, 'snack_menu.db')
+
+# --- CONFIGURATION EMAIL WORKSPACE ---
+EMAIL_SENDER = "contact@snackandsurf.sn"
+EMAIL_PASSWORD = "sbcxdcpheyocrenh"
+EMAIL_RECEIVER = "contact@snackandsurf.sn"
+
+def send_notification_email(nom, contact, date_event, personnes, type_event):
+    sujet = f"🏖️ Nouvelle Privatisation Snack & Surf : {type_event} - {nom}"
+    corps = f"""
+Bonjour,
+
+Une nouvelle demande de privatisation vient d'être effectuée sur le site Snack & Surf.
+
+=====================================
+Détails de la demande :
+=====================================
+• Nom / Entreprise : {nom}
+• Contact (Email ou Tel) : {contact}
+• Type d'événement : {type_event}
+• Date souhaitée : {date_event}
+• Nombre de personnes : {personnes}
+=====================================
+
+Vous pouvez valider, modifier le statut ou supprimer cette demande dans votre panneau d'administration :
+https://snackandsurf.sn/admin
+
+Cordialement,
+Le bot Snack & Surf
+    """
+
+    msg = MIMEMultipart()
+    msg['From'] = f"Snack & Surf Web <{EMAIL_SENDER}>"
+    msg['To'] = EMAIL_RECEIVER
+    msg['Subject'] = sujet
+    msg.attach(MIMEText(corps, 'plain', 'utf-8'))
+
+    try:
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(EMAIL_SENDER, EMAIL_PASSWORD)
+        server.send_message(msg)
+        server.quit()
+        print("Email envoyé avec succès.")
+    except Exception as e:
+        print(f"Erreur d'envoi de l'email : {e}")
 
 def get_db_connection():
     conn = sqlite3.connect(DB_FILE)
@@ -49,13 +97,23 @@ def get_menu():
 def privatisation():
     succes = False
     if request.method == 'POST':
+        nom = request.form.get('nom')
+        contact = request.form.get('email')
+        date_event = request.form.get('date')
+        personnes = request.form.get('personnes')
+        type_event = request.form.get('type')
+        
         conn = get_db_connection()
         conn.execute(
             'INSERT INTO reservations (date_demande, nom, contact, date_event, personnes, type_event) VALUES (?, ?, ?, ?, ?, ?)', 
-            (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), request.form.get('nom'), request.form.get('email'), request.form.get('date'), request.form.get('personnes'), request.form.get('type'))
+            (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), nom, contact, date_event, personnes, type_event)
         )
         conn.commit()
         conn.close()
+        
+        # Envoi de la notification par email
+        send_notification_email(nom, contact, date_event, personnes, type_event)
+        
         succes = True
     return render_template('privatisation.html', succes=succes)
 
