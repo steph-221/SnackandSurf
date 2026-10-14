@@ -1,11 +1,10 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for, session, abort
+from flask import Flask, render_template, jsonify, request, redirect, url_for, session
 import sqlite3
 import os
 import subprocess
 
 app = Flask(__name__)
-app.secret_key = "super_secret_key_snack_surf"
-
+app.secret_key = 'super_secret_key_snack_surf'
 DB_FILE = 'snack_menu.db'
 
 def get_db_connection():
@@ -27,49 +26,36 @@ def init_db():
     cursor = conn.cursor()
     cursor.execute('SELECT COUNT(*) FROM menu')
     if cursor.fetchone()[0] == 0:
-        plats_defaut = [
-            ("Burgers", "Classic Surf Burger", "4 000 FCFA", "Boeuf haché, cheddar, salade, tomate, sauce maison."),
-            ("Boissons", "Smoothie Tropical", "2 500 FCFA", "Mélange mangue, ananas, fruit de la passion.")
-        ]
-        cursor.executemany('INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', plats_defaut)
+        plats = [("Burgers", "Classic Surf Burger", "4 000 FCFA", "Boeuf, cheddar, salade, tomate."), ("Boissons", "Smoothie Tropical", "2 500 FCFA", "Mangue, ananas, passion.")]
+        cursor.executemany('INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', plats)
         conn.commit()
     conn.close()
 
 init_db()
 
 @app.route('/')
-def accueil():
-    return render_template('index.html')
+def accueil(): return render_template('index.html')
 
 @app.route('/api/menu')
 def get_menu():
     conn = get_db_connection()
     plats = conn.execute('SELECT * FROM menu').fetchall()
     conn.close()
-    menu_data = {}
-    for plat in plats:
-        cat = plat['categorie']
-        if cat not in menu_data:
-            menu_data[cat] = {"categorie": cat, "items": []}
-        menu_data[cat]["items"].append({
-            "id": plat['id'],
-            "nom": plat['nom'],
-            "prix": plat['prix'],
-            "desc": plat['description']
-        })
-    return jsonify(list(menu_data.values()))
-
-ADMIN_PASSWORD = "surf"
+    menu = {}
+    for p in plats:
+        cat = p['categorie']
+        if cat not in menu: menu[cat] = {"categorie": cat, "items": []}
+        menu[cat]["items"].append({"id": p['id'], "nom": p['nom'], "prix": p['prix'], "desc": p['description']})
+    return jsonify(list(menu.values()))
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if 'admin_logged_in' not in session:
         if request.method == 'POST':
-            if request.form.get('password') == ADMIN_PASSWORD:
+            if request.form.get('password') == 'surf':
                 session['admin_logged_in'] = True
                 return redirect(url_for('admin'))
-            else:
-                return "Mot de passe incorrect", 403
+            return "Mot de passe incorrect", 403
         return render_template('admin_login.html')
     conn = get_db_connection()
     plats = conn.execute('SELECT * FROM menu ORDER BY categorie').fetchall()
@@ -79,12 +65,8 @@ def admin():
 @app.route('/admin/ajouter', methods=['POST'])
 def admin_ajouter():
     if 'admin_logged_in' not in session: return redirect(url_for('admin'))
-    categorie = request.form['categorie']
-    nom = request.form['nom']
-    prix = request.form['prix']
-    description = request.form['description']
     conn = get_db_connection()
-    conn.execute('INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', (categorie, nom, prix, description))
+    conn.execute('INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', (request.form['categorie'], request.form['nom'], request.form['prix'], request.form['description']))
     conn.commit()
     conn.close()
     return redirect(url_for('admin'))
@@ -105,20 +87,7 @@ def admin_logout():
 
 @app.route('/deploy', methods=['POST'])
 def auto_deploy():
-    secret = request.args.get('token')
-    if secret != "surf_secret_almadies_2026":
-        abort(403)
-    repo_dir = '/home/snackandsurf/SnackandSurf'
-    
-    # 1. Récupérer le code sur GitHub
-    subprocess.run(['git', '-C', repo_dir, 'pull'], check=True)
-    
-    # 2. Recharger le serveur PythonAnywhere en actualisant le fichier WSGI
-    wsgi_file = '/var/www/snackandsurf_pythonanywhere_com_wsgi.py'
-    if os.path.exists(wsgi_file):
-        os.utime(wsgi_file, None)
-        
-    return 'Site mis à jour avec succès !', 200
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    if request.args.get('token') != 'surf_secret_almadies_2026': from flask import abort; abort(403)
+    subprocess.run(['git', '-C', '/home/snackandsurf/SnackandSurf', 'pull'], check=True)
+    if os.path.exists('/var/www/snackandsurf_pythonanywhere_com_wsgi.py'): os.utime('/var/www/snackandsurf_pythonanywhere_com_wsgi.py', None)
+    return 'Site mis � jour', 200
