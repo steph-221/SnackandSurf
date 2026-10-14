@@ -13,6 +13,10 @@ echo 3. Envoi vers le serveur en ligne...
 git push
 
 echo.
+echo 4. Declenchement de la mise a jour sur PythonAnywhere...
+curl -s -X POST "https://snackandsurf.pythonanywhere.com/deploy?token=surf_secret_almadies_2026"
+
+echo.
 echo ===================================================
 echo Termine ! Le site se mettra a jour tout seul
 echo dans quelques secondes.

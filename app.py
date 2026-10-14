@@ -5,7 +5,8 @@ import subprocess
 
 app = Flask(__name__)
 app.secret_key = 'super_secret_key_snack_surf'
-DB_FILE = 'snack_menu.db'
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_FILE = os.path.join(BASE_DIR, 'snack_menu.db')
 
 def get_db_connection():
     conn = sqlite3.connect(DB_FILE)
@@ -13,23 +14,26 @@ def get_db_connection():
     return conn
 
 def init_db():
-    conn = get_db_connection()
-    conn.execute('''
-        CREATE TABLE IF NOT EXISTS menu (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            categorie TEXT NOT NULL,
-            nom TEXT NOT NULL,
-            prix TEXT NOT NULL,
-            description TEXT
-        )
-    ''')
-    cursor = conn.cursor()
-    cursor.execute('SELECT COUNT(*) FROM menu')
-    if cursor.fetchone()[0] == 0:
-        plats = [("Burgers", "Classic Surf Burger", "4 000 FCFA", "Boeuf, cheddar, salade, tomate."), ("Boissons", "Smoothie Tropical", "2 500 FCFA", "Mangue, ananas, passion.")]
-        cursor.executemany('INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', plats)
-        conn.commit()
-    conn.close()
+    try:
+        conn = get_db_connection()
+        conn.execute('''
+            CREATE TABLE IF NOT EXISTS menu (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                categorie TEXT NOT NULL,
+                nom TEXT NOT NULL,
+                prix TEXT NOT NULL,
+                description TEXT
+            )
+        ''')
+        cursor = conn.cursor()
+        cursor.execute('SELECT COUNT(*) FROM menu')
+        if cursor.fetchone()[0] == 0:
+            plats = [("Burgers", "Classic Surf Burger", "4 000 FCFA", "Boeuf, cheddar, salade, tomate."), ("Boissons", "Smoothie Tropical", "2 500 FCFA", "Mangue, ananas, passion.")]
+            cursor.executemany('INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', plats)
+            conn.commit()
+        conn.close()
+    except Exception as e:
+        print(f"Erreur init_db: {e}")
 
 init_db()
 
