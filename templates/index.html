@@ -32,12 +32,12 @@
       "priceRange": "500 - 6000 FCFA",
       "servesCuisine": ["Burgers", "Snacks", "Fast Food", "Desserts"],
       "openingHoursSpecification": [
+        {"@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "11:00", "closes": "17:00"},
         {"@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "11:00", "closes": "20:00"},
         {"@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "11:00", "closes": "20:00"},
         {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "11:00", "closes": "20:00"},
         {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "11:00", "closes": "21:00"},
-        {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "22:00"},
-        {"@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "09:00", "closes": "20:00"}
+        {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "22:00"}
       ]
     }
     </script>
@@ -98,20 +98,20 @@
                 <div class="bg-white rounded-lg p-5 shadow-sm text-center border-t-4 border-[var(--senegal-green)]">
                     <h3 class="font-bold text-xl mb-4 text-gray-800">Horaires</h3>
                     <ul class="text-sm text-gray-700 space-y-1 mb-6 inline-block text-left w-3/4 mx-auto">
-                        <li class="flex justify-between"><span class="font-semibold w-12">Lun</span> <span>Ferme</span></li>
-                        <li class="flex justify-between"><span class="font-semibold w-12">Mar</span> <span>11h - 20h</span></li>
-                        <li class="flex justify-between"><span class="font-semibold w-12">Mer</span> <span>11h - 20h</span></li>
-                        <li class="flex justify-between"><span class="font-semibold w-12">Jeu</span> <span>11h - 20h</span></li>
-                        <li class="flex justify-between"><span class="font-semibold w-12">Ven</span> <span>11h - 21h</span></li>
-                        <li class="flex justify-between"><span class="font-semibold w-12">Sam</span> <span>9h - 22h</span></li>
-                        <li class="flex justify-between"><span class="font-semibold w-12">Dim</span> <span>9h - 20h</span></li>
+                        <li class="flex justify-between"><span class="font-semibold w-12">Lun</span> <span>11h00 - 17h00</span></li>
+                        <li class="flex justify-between"><span class="font-semibold w-12">Mar</span> <span>11h00 - 20h00</span></li>
+                        <li class="flex justify-between"><span class="font-semibold w-12">Mer</span> <span>11h00 - 20h00</span></li>
+                        <li class="flex justify-between"><span class="font-semibold w-12">Jeu</span> <span>11h00 - 20h00</span></li>
+                        <li class="flex justify-between"><span class="font-semibold w-12">Ven</span> <span>11h00 - 21h00</span></li>
+                        <li class="flex justify-between"><span class="font-semibold w-12">Sam</span> <span>09h00 - 22h00</span></li>
+                        <li class="flex justify-between text-red-600"><span class="font-semibold w-12">Dim</span> <span>Ferme</span></li>
                     </ul>
                     <hr class="my-4 border-gray-200">
                     <h3 class="font-bold text-lg mb-2 text-gray-800">Contact</h3>
                     <p class="text-sm font-semibold mb-1">📞 +221 71 057 93 71</p>
                     <p class="text-sm text-gray-600 mb-4">✉️ contact@snackandsurf.sn</p>
                     
-                    <!-- Reseaux Sociaux -->
+                    <!-- Réseaux Sociaux -->
                     <div class="flex justify-center gap-4">
                         <a href="https://instagram.com/snackandsurf" target="_blank" class="text-pink-600 hover:scale-110 transition transform">
                             <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
@@ -122,7 +122,7 @@
                     </div>
                 </div>
 
-                <!-- Google Maps (Iframe) -->
+                <!-- Google Maps -->
                 <div class="rounded-lg overflow-hidden shadow-md border-4 border-white h-full min-h-[250px]">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15433.00318042456!2d-17.5140685!3d14.7435384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQ0JzM2LjciTiAxN8KwMzAnNTAuNiJX!5e0!3m2!1sfr!2ssn!4v1690000000000!5m2!1sfr!2ssn" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
