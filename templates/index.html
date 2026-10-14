@@ -36,7 +36,6 @@
         }
         .btn-add:active { transform: scale(0.9); }
 
-        /* Le bandeau du panier en bas */
         #cart-bar {
             position: fixed; bottom: 0; left: 0; right: 0; background-color: #25D366; color: white;
             padding: 15px 20px; display: flex; justify-content: space-between; align-items: center;
@@ -45,13 +44,14 @@
         }
         #cart-bar.visible { transform: translateY(0); }
 
-        /* Fenêtre modale du détail du panier */
         #cart-modal {
             position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5);
             z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px;
         }
         #cart-modal.visible { display: flex; }
         .cart-content { background: white; width: 100%; max-w: 500px; border-radius: 1rem; padding: 20px; max-height: 80vh; overflow-y: auto; color: #333; }
+
+        @media (max-width: 640px) { .section-title { font-size: 1.75rem; } }
     </style>
 </head>
 <body class="p-4 sm:p-8">
@@ -71,8 +71,55 @@
             <img src="https://drive.google.com/thumbnail?id=1ffuCBqJBhUMZF1akm5_CL7_txgfaJF2m&sz=w1000" alt="Snack and Surf Logo" class="max-w-[250px] sm:max-w-[300px] h-auto drop-shadow-md">
         </div>
 
+        <!-- MESSAGE D'EXPLICATION POUR LA COMMANDE -->
+        <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-800 p-4 rounded shadow-sm mb-8 text-sm sm:text-base">
+            <p class="font-bold flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+                Comment commander en ligne ?
+            </p>
+            <ul class="mt-2 ml-6 list-disc">
+                <li>Ajoutez vos plats au panier en cliquant sur le bouton <strong class="bg-green-600 text-white rounded-full px-2 py-0.5 inline-block text-xs">+</strong></li>
+                <li>Cliquez sur le bandeau vert qui s'affiche en bas de l'écran pour finaliser.</li>
+                <li>Votre commande complète sera envoyée directement sur notre WhatsApp !</li>
+            </ul>
+        </div>
+
         <div id="dynamic-menu-container"></div>
+        
+        <!-- SECTION CONTACT & INFOS -->
+        <div class="mt-16 bg-[#FDEF42] rounded-xl p-6 shadow-inner relative overflow-hidden border-2 border-white">
+            <h2 class="section-title !mt-0 mb-8 !text-gray-900 !after:bg-[var(--senegal-red)] !after:shadow-none">NOUS TROUVER</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
+                <div class="bg-white rounded-lg p-5 shadow-sm text-center border-t-4 border-[var(--senegal-green)]">
+                    <h3 class="font-bold text-xl mb-4 text-gray-800">Horaires</h3>
+                    <ul class="text-sm text-gray-700 space-y-1 mb-6 inline-block text-left w-3/4 mx-auto">
+                        <li class="flex justify-between"><span class="font-semibold w-12">Lun</span> <span>11h00 - 17h00</span></li>
+                        <li class="flex justify-between"><span class="font-semibold w-12">Mar</span> <span>11h00 - 20h00</span></li>
+                        <li class="flex justify-between"><span class="font-semibold w-12">Mer</span> <span>11h00 - 20h00</span></li>
+                        <li class="flex justify-between"><span class="font-semibold w-12">Jeu</span> <span>11h00 - 20h00</span></li>
+                        <li class="flex justify-between"><span class="font-semibold w-12">Ven</span> <span>11h00 - 21h00</span></li>
+                        <li class="flex justify-between"><span class="font-semibold w-12">Sam</span> <span>09h00 - 22h00</span></li>
+                        <li class="flex justify-between text-red-600"><span class="font-semibold w-12">Dim</span> <span>Ferme</span></li>
+                    </ul>
+                    <hr class="my-4 border-gray-200">
+                    <h3 class="font-bold text-lg mb-2 text-gray-800">Contact</h3>
+                    <p class="text-sm font-semibold mb-1">📞 +221 71 057 93 71</p>
+                    <p class="text-sm text-gray-600 mb-4">✉️ contact@snackandsurf.sn</p>
+                </div>
+
+                <div class="rounded-lg overflow-hidden shadow-md border-4 border-white h-full min-h-[250px]">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15433.00318042456!2d-17.5140685!3d14.7435384!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTTCsDQ0JzM2LjciTiAxN8KwMzAnNTAuNiJX!5e0!3m2!1sfr!2ssn!4v1690000000000!5m2!1sfr!2ssn" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+
     </main>
+
+    <!-- BOUTON WHATSAPP GENERAL (POUR QUESTIONS SIMPLES) -->
+    <a href="https://wa.me/221710579371?text=Bonjour%20Snack%20%26%20Surf%2C%20j'ai%20une%20question%20!" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-5 rounded-full shadow-2xl transition-all transform hover:scale-105">
+        <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.679-.702c.97.529 1.838.783 2.78.783h.001c3.182 0 5.768-2.587 5.769-5.766.001-3.182-2.585-5.767-5.769-5.767zm7.551 5.766c-.001 4.165-3.39 7.554-7.553 7.554-1.259 0-2.438-.328-3.486-.902l-4.543 1.19 1.213-4.431c-.655-1.084-1.024-2.353-1.024-3.411.001-4.165 3.39-7.554 7.553-7.554 4.164 0 7.553 3.389 7.554 7.554zm-4.708 2.062c-.21-.105-1.242-.613-1.434-.683-.193-.07-.333-.105-.473.105-.14.21-.543.683-.666.823-.122.14-.245.158-.455.053-.21-.105-.888-.327-1.691-1.043-.625-.558-1.047-1.247-1.17-1.457-.122-.21-.013-.324.092-.428.095-.094.21-.245.315-.368.105-.123.14-.21.21-.35.07-.14.035-.263-.018-.368-.053-.105-.473-1.14-.648-1.56-.17-.41-.344-.354-.473-.36-.122-.006-.263-.007-.403-.007-.14 0-.368.053-.56.263-.193.21-.736.719-.736 1.753s.753 2.033.858 2.173c.105.14 1.482 2.263 3.59 3.173.501.217.892.346 1.197.443.503.16 1.012.137 1.393.08.425-.064 1.242-.508 1.417-.999.175-.49.175-.91.122-.999-.052-.088-.192-.14-.402-.245z"/></svg>
+    </a>
 
     <!-- BANDEAU PANIER -->
     <div id="cart-bar" onclick="toggleCartModal()">
@@ -89,9 +136,7 @@
             <button onclick="toggleCartModal()" class="absolute top-4 right-4 text-gray-500 font-bold text-xl">×</button>
             <h2 class="text-2xl font-bold mb-6 text-green-600 border-b pb-2">Ma Commande</h2>
             
-            <div id="cart-items-list" class="mb-6 space-y-3">
-                <!-- Les articles du panier apparaitront ici -->
-            </div>
+            <div id="cart-items-list" class="mb-6 space-y-3"></div>
             
             <div class="border-t pt-4 flex justify-between items-center mb-6">
                 <span class="text-lg font-bold">Total :</span>
@@ -111,7 +156,6 @@
         let cart = {};
         
         function parsePrice(priceStr) {
-            // Transforme "4 000 FCFA" en entier 4000
             return parseInt(priceStr.replace(/\D/g, ''));
         }
 
@@ -149,15 +193,15 @@
                 totalPrice += item.prix * item.qty;
                 
                 listHtml += `
-                <div class="flex justify-between items-center bg-gray-50 p-2 rounded">
+                <div class="flex justify-between items-center bg-gray-50 p-2 rounded border border-gray-100">
                     <div>
                         <div class="font-bold">`+item.nom+`</div>
                         <div class="text-sm text-gray-500">`+item.prixStr+`</div>
                     </div>
                     <div class="flex items-center gap-3">
-                        <button onclick="removeFromCart('`+id+`')" class="bg-red-100 text-red-600 rounded-full w-8 h-8 font-bold">-</button>
+                        <button onclick="removeFromCart('`+id+`')" class="bg-red-100 text-red-600 rounded-full w-8 h-8 font-bold text-xl">-</button>
                         <span class="font-bold w-4 text-center">`+item.qty+`</span>
-                        <button onclick="addToCart('`+id+`', '`+item.nom+`', '`+item.prixStr+`')" class="bg-green-100 text-green-600 rounded-full w-8 h-8 font-bold">+</button>
+                        <button onclick="addToCart('`+id+`', '`+item.nom+`', '`+item.prixStr+`')" class="bg-green-100 text-green-600 rounded-full w-8 h-8 font-bold text-xl">+</button>
                     </div>
                 </div>`;
             }
@@ -188,7 +232,7 @@
                 totalPrice += itemTotal;
                 message += "▫️ " + item.qty + "x " + item.nom + " (" + itemTotal + " FCFA)\n";
             }
-            message += "\n💰 *TOTAL : " + totalPrice + " FCFA*";
+            message += "\n�� *TOTAL : " + totalPrice + " FCFA*";
             message += "\n\n_Pouvez-vous preparer cette commande s'il vous plait ?_";
             
             let waLink = "https://wa.me/221710579371?text=" + encodeURIComponent(message);
@@ -202,8 +246,7 @@
                 data.forEach(categorie => {
                     let html = `<div class="text-center mb-8"><h2 class="section-title uppercase">`+categorie.categorie+`</h2><div class="space-y-2">`;
                     categorie.items.forEach(item => {
-                        let descHtml = item.desc ? `<p class="item-ingredients text-left bg-[#fffde7] border-l-4 border-[#FDEF42] p-2 mt-1 mb-2 rounded-r">`+item.desc+`</p>` : '';
-                        // Nouveau bouton PLUS pour ajouter au panier
+                        let descHtml = item.desc ? `<p class="item-ingredients text-left bg-[#fffde7] border-l-4 border-[#FDEF42] p-2 mt-1 mb-2 rounded-r shadow-sm">`+item.desc+`</p>` : '';
                         let addBtn = `<button onclick="addToCart('`+item.id+`', '`+item.nom.replace(/'/g, "\\'")+`', '`+item.prix+`')" class="btn-add">+</button>`;
                         
                         html += `<div class="menu-item-block"><div class="item-row"><div class="item-name-dots"><span class="item-name uppercase text-left">`+item.nom+`</span><div class="dots-separator"></div></div><div class="flex items-center"><span class="item-price">`+item.prix+`</span>`+addBtn+`</div></div>`+descHtml+`</div>`;
