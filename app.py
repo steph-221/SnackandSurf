@@ -18,7 +18,7 @@ EMAIL_SENDER = "contact@snackandsurf.sn"
 EMAIL_PASSWORD = "sbcxdcpheyocrenh"
 EMAIL_RECEIVER = "contact@snackandsurf.sn"
 
-def send_notification_email(nom, contact, date_event, personnes, type_event):
+def send_notification_email(nom, contact, date_event, personnes, type_event, message_libre):
     sujet = f"🏖️ Nouvelle Privatisation Snack & Surf : {type_event} - {nom}"
     corps = f"""
 Bonjour,
@@ -33,9 +33,12 @@ Détails de la demande :
 • Type d'événement : {type_event}
 • Date souhaitée : {date_event}
 • Nombre de personnes : {personnes}
+
+Message du client :
+{message_libre if message_libre else "Aucun message particulier."}
 =====================================
 
-Vous pouvez valider, modifier le statut ou supprimer cette demande dans votre panneau d'administration :
+Vous pouvez gérer cette demande dans votre panneau d'administration :
 https://snackandsurf.sn/admin
 
 Cordialement,
@@ -62,6 +65,19 @@ def get_db_connection():
     conn = sqlite3.connect(DB_FILE)
     conn.row_factory = sqlite3.Row
     return conn
+
+# Script pour ajouter la colonne 'message' si elle n'existe pas
+def upgrade_db():
+    conn = get_db_connection()
+    try:
+        conn.execute('ALTER TABLE reservations ADD COLUMN message TEXT')
+        conn.commit()
+    except sqlite3.OperationalError:
+        pass # La colonne existe déjà
+    finally:
+        conn.close()
+
+upgrade_db()
 
 @app.route('/sitemap.xml')
 def sitemap():
@@ -102,19 +118,19 @@ def privatisation():
         date_event = request.form.get('date')
         personnes = request.form.get('personnes')
         type_event = request.form.get('type')
+        message_libre = request.form.get('message')
         
         conn = get_db_connection()
         conn.execute(
-            'INSERT INTO reservations (date_demande, nom, contact, date_event, personnes, type_event) VALUES (?, ?, ?, ?, ?, ?)', 
-            (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), nom, contact, date_event, personnes, type_event)
+            'INSERT INTO reservations (date_demande, nom, contact, date_event, personnes, type_event, message) VALUES (?, ?, ?, ?, ?, ?, ?)', 
+            (datetime.now().strftime("%Y-%m-%d %H:%M:%S"), nom, contact, date_event, personnes, type_event, message_libre)
         )
         conn.commit()
         conn.close()
         
-        # Envoi de la notification par email
-        send_notification_email(nom, contact, date_event, personnes, type_event)
-        
+        send_notification_email(nom, contact, date_event, personnes, type_event, message_libre)
         succes = True
+        
     return render_template('privatisation.html', succes=succes)
 
 @app.route('/admin', methods=['GET', 'POST'])
