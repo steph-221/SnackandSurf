@@ -95,39 +95,143 @@
                 <span>📋</span> Gestion de la Carte
             </h2>
 
+            <!-- Formulaire d'ajout avec sélecteur de catégories & sous-catégories -->
             <div class="bg-blue-50 p-5 rounded-xl mb-8 border border-blue-200">
-                <h3 class="font-bold text-base mb-3 text-blue-900">Ajouter un plat</h3>
+                <h3 class="font-bold text-base mb-3 text-blue-900 flex items-center gap-2">
+                    <span>➕</span> Ajouter un plat ou produit
+                </h3>
                 <form action="/admin/ajouter" method="POST" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input type="text" name="categorie" placeholder="Catégorie (ex: Snacks, Boissons)" class="border border-gray-300 p-2 rounded text-sm bg-white" required>
-                    <input type="text" name="nom" placeholder="Nom du plat" class="border border-gray-300 p-2 rounded text-sm bg-white" required>
-                    <input type="text" name="prix" placeholder="Prix (ex: 4 000 FCFA)" class="border border-gray-300 p-2 rounded text-sm bg-white" required>
-                    <input type="text" name="description" placeholder="Description / Ingrédients" class="border border-gray-300 p-2 rounded text-sm bg-white sm:col-span-2">
-                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded font-bold sm:col-span-2 transition text-sm">
-                        Ajouter le plat
+                    
+                    <!-- Sélecteur Catégories et Sous-catégories -->
+                    <div class="sm:col-span-1">
+                        <label for="categorieSelect" class="block text-xs font-bold text-gray-700 uppercase mb-1">
+                            Catégorie / Sous-catégorie
+                        </label>
+                        <select name="categorie" id="categorieSelect" class="w-full border border-gray-300 p-2.5 rounded-lg text-sm bg-white font-medium focus:ring-2 focus:ring-blue-500 outline-none" required onchange="handleCategoryChange(this.value)">
+                            <optgroup label="⭐ Formules">
+                                <option value="Menu du Jour">Menu du Jour (Plat / Formule du Midi)</option>
+                                <option value="Menus / Combo">Menus / Combo (+ Frites + Boisson)</option>
+                            </optgroup>
+                            <optgroup label="🌭 Snacks & Burgers">
+                                <option value="Snacks" selected>Snacks (Burgers, Hot Dogs, Wings)</option>
+                                <option value="Snacks - Toppings Burger">Snacks - Toppings Burger (Fromage, Œuf, Steak...)</option>
+                            </optgroup>
+                            <optgroup label="🍟 Accompagnements">
+                                <option value="Sides">Sides (Frites, Salades...)</option>
+                            </optgroup>
+                            <optgroup label="🥞 Crêpes">
+                                <option value="Crêpes">Crêpes (Sucrées ou Salées)</option>
+                                <option value="Crêpes - Toppings">Crêpes - Toppings (Chantilly, Nutella, Miel...)</option>
+                                <option value="Crêpes - Options Salées">Crêpes - Options Salées (Œuf...)</option>
+                            </optgroup>
+                            <optgroup label="🧇 Gourmandises & Desserts">
+                                <option value="Gourmandises / IHOP">Gourmandises / IHOP (Gaufres, Pancakes, Cakes)</option>
+                                <option value="Gourmandises - Toppings">Gourmandises - Toppings Sucrés</option>
+                            </optgroup>
+                            <optgroup label="☕ Boissons">
+                                <option value="Boissons Chaudes">Boissons Chaudes (Cafés, Thés, Infusions)</option>
+                                <option value="Boissons Fraîches">Boissons Fraîches (Jus locaux, Sodas, Eaux)</option>
+                            </optgroup>
+                            <optgroup label="🍦 Glaces">
+                                <option value="Glaces">Glaces (Creamy, Eskimo)</option>
+                            </optgroup>
+                            <optgroup label="➕ Personnalisée">
+                                <option value="__NEW__">+ Créer une nouvelle catégorie...</option>
+                            </optgroup>
+                        </select>
+                        <input type="text" name="nouvelle_categorie" id="nouvelleCategorieInput" placeholder="Entrez le nom de la nouvelle catégorie" class="hidden w-full border border-blue-400 bg-blue-100/50 p-2 rounded text-sm mt-2 focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+
+                    <!-- Nom du produit -->
+                    <div class="sm:col-span-1">
+                        <label for="nom" class="block text-xs font-bold text-gray-700 uppercase mb-1">Nom du produit / Topping</label>
+                        <input type="text" id="nom" name="nom" placeholder="ex: Cheese Burger Steak ou -- Topping Fromage" class="w-full border border-gray-300 p-2.5 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500 outline-none" required>
+                    </div>
+
+                    <!-- Prix -->
+                    <div class="sm:col-span-1">
+                        <label for="prix" class="block text-xs font-bold text-gray-700 uppercase mb-1">Prix</label>
+                        <input type="text" id="prix" name="prix" placeholder="ex: 4 000 FCFA ou 500 FCFA" class="w-full border border-gray-300 p-2.5 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500 outline-none" required>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="sm:col-span-1">
+                        <label for="description" class="block text-xs font-bold text-gray-700 uppercase mb-1">Description / Ingrédients (optionnel)</label>
+                        <input type="text" id="description" name="description" placeholder="ex: 1 Steak, cheddar, oignons... (ou laisser vide)" class="w-full border border-gray-300 p-2.5 rounded-lg text-sm bg-white focus:ring-2 focus:ring-blue-500 outline-none">
+                    </div>
+
+                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-3 rounded-lg font-bold sm:col-span-2 transition text-sm shadow">
+                        Ajouter le produit à la carte
                     </button>
                 </form>
             </div>
 
-            <h3 class="font-bold text-lg mb-4 text-gray-800">Plats actuels ({{ plats|length }})</h3>
+            <!-- Filtre et Titre du Tableau -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4 pb-2 border-b">
+                <h3 class="font-bold text-lg text-gray-800">
+                    Plats actuels (<span id="visiblePlatsCount">{{ plats|length }}</span>)
+                </h3>
+                <div class="flex items-center gap-2 text-sm w-full sm:w-auto">
+                    <label for="categoryFilter" class="text-xs font-bold text-gray-600 uppercase whitespace-nowrap">Filtrer par section :</label>
+                    <select id="categoryFilter" onchange="filterTable(this.value)" class="border border-gray-300 rounded-lg px-3 py-1.5 text-xs font-semibold bg-white outline-none focus:ring-2 focus:ring-blue-500 w-full sm:w-auto">
+                        <option value="ALL">Toutes les catégories ({{ plats|length }})</option>
+                        <option value="Menu du Jour">Menu du Jour</option>
+                        <option value="Snacks">Snacks</option>
+                        <option value="Snacks - Toppings Burger">Snacks - Toppings Burger</option>
+                        <option value="Sides">Sides</option>
+                        <option value="Menus / Combo">Menus / Combo</option>
+                        <option value="Crêpes">Crêpes</option>
+                        <option value="Crêpes - Toppings">Crêpes - Toppings</option>
+                        <option value="Crêpes - Options Salées">Crêpes - Options Salées</option>
+                        <option value="Gourmandises / IHOP">Gourmandises / IHOP</option>
+                        <option value="Gourmandises - Toppings">Gourmandises - Toppings</option>
+                        <option value="Boissons Chaudes">Boissons Chaudes</option>
+                        <option value="Boissons Fraîches">Boissons Fraîches</option>
+                        <option value="Glaces">Glaces</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Tableau des Plats -->
             <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse text-sm">
+                <table class="w-full text-left border-collapse text-sm" id="menuTable">
                     <thead>
                         <tr class="bg-gray-100 text-gray-700">
-                            <th class="p-2.5 border">Catégorie</th>
-                            <th class="p-2.5 border">Nom</th>
-                            <th class="p-2.5 border">Prix</th>
-                            <th class="p-2.5 border text-center">Action</th>
+                            <th class="p-3 border">Catégorie</th>
+                            <th class="p-3 border">Nom</th>
+                            <th class="p-3 border">Prix</th>
+                            <th class="p-3 border text-center">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="divide-y divide-gray-100">
                         {% for plat in plats %}
-                        <tr class="hover:bg-gray-50">
-                            <td class="p-2.5 border"><span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-0.5 rounded">{{ plat.categorie }}</span></td>
-                            <td class="p-2.5 border font-bold">{{ plat.nom }}</td>
-                            <td class="p-2.5 border text-blue-600 font-semibold">{{ plat.prix }}</td>
-                            <td class="p-2.5 border text-center">
-                                <form action="/admin/supprimer/{{ plat.id }}" method="POST" onsubmit="return confirm('Supprimer ce plat ?');">
-                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition">
+                        <tr class="hover:bg-gray-50 menu-row" data-category="{{ plat.categorie }}">
+                            <td class="p-3 border">
+                                <span class="text-xs font-bold px-2.5 py-1 rounded-full whitespace-nowrap
+                                    {% if 'Topping' in plat.categorie or 'Option' in plat.categorie %}
+                                        bg-amber-100 text-amber-800 border border-amber-200
+                                    {% elif 'Boisson' in plat.categorie or 'Glace' in plat.categorie %}
+                                        bg-cyan-100 text-cyan-800 border border-cyan-200
+                                    {% elif 'Crêpe' in plat.categorie or 'Gourmandise' in plat.categorie %}
+                                        bg-purple-100 text-purple-800 border border-purple-200
+                                    {% elif 'Combo' in plat.categorie %}
+                                        bg-emerald-100 text-emerald-800 border border-emerald-200
+                                    {% else %}
+                                        bg-blue-100 text-blue-800 border border-blue-200
+                                    {% endif %}">
+                                    {{ plat.categorie }}
+                                </span>
+                            </td>
+                            <td class="p-3 border font-bold text-gray-900">
+                                {{ plat.nom }}
+                                {% if plat.description %}
+                                <div class="text-xs text-gray-500 font-normal italic mt-0.5">{{ plat.description }}</div>
+                                {% endif %}
+                            </td>
+                            <td class="p-3 border text-blue-600 font-bold whitespace-nowrap">{{ plat.prix }}</td>
+                            <td class="p-3 border text-center whitespace-nowrap">
+                                <form action="/admin/supprimer/{{ plat.id }}" method="POST" onsubmit="return confirm('Supprimer ce plat ({{ plat.nom }}) ?');">
+                                    <button type="submit" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition shadow-sm">
                                         Supprimer
                                     </button>
                                 </form>
@@ -140,5 +244,35 @@
         </div>
 
     </div>
+
+    <!-- Scripts utilitaires pour l'Admin -->
+    <script>
+        function handleCategoryChange(val) {
+            const customInput = document.getElementById('nouvelleCategorieInput');
+            if (val === '__NEW__') {
+                customInput.classList.remove('hidden');
+                customInput.required = true;
+                customInput.focus();
+            } else {
+                customInput.classList.add('hidden');
+                customInput.required = false;
+            }
+        }
+
+        function filterTable(category) {
+            const rows = document.querySelectorAll('.menu-row');
+            let visibleCount = 0;
+            rows.forEach(row => {
+                const rowCat = row.getAttribute('data-category');
+                if (category === 'ALL' || rowCat === category) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            document.getElementById('visiblePlatsCount').textContent = visibleCount;
+        }
+    </script>
 </body>
 </html>

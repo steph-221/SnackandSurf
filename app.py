@@ -166,13 +166,21 @@ def admin():
 def admin_ajouter():
     if 'admin_logged_in' not in session: 
         return redirect(url_for('admin'))
-    conn = get_db_connection()
-    conn.execute(
-        'INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', 
-        (request.form['categorie'], request.form['nom'], request.form['prix'], request.form['description'])
-    )
-    conn.commit()
-    conn.close()
+    categorie = request.form.get('categorie', '').strip()
+    if categorie == '__NEW__':
+        categorie = request.form.get('nouvelle_categorie', '').strip()
+    nom = request.form.get('nom', '').strip()
+    prix = request.form.get('prix', '').strip()
+    description = request.form.get('description', '').strip()
+
+    if categorie and nom and prix:
+        conn = get_db_connection()
+        conn.execute(
+            'INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', 
+            (categorie, nom, prix, description)
+        )
+        conn.commit()
+        conn.close()
     return redirect(url_for('admin'))
 
 @app.route('/admin/supprimer/<int:id>', methods=['POST'])
