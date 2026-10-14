@@ -192,12 +192,19 @@ def admin_logout():
 
 @app.route('/deploy', methods=['POST'])
 def auto_deploy():
-    if request.args.get('token') != 'surf_secret_almadies_2026': from flask import abort; abort(403)
+    if request.args.get('token') != 'surf_secret_almadies_2026': 
+        from flask import abort
+        abort(403)
     repo = '/home/snackandsurf/SnackandSurf'
-    subprocess.run(['git', '-C', repo, 'stash'], capture_output=True)
-    subprocess.run(['git', '-C', repo, 'pull'], check=True)
-    if os.path.exists('/var/www/snackandsurf_pythonanywhere_com_wsgi.py'): os.utime('/var/www/snackandsurf_pythonanywhere_com_wsgi.py', None)
-    return 'Site mis a jour', 200
+    try:
+        subprocess.run(['git', '-C', repo, 'checkout', '--', '.'], capture_output=True)
+        subprocess.run(['git', '-C', repo, 'pull'], check=True, capture_output=True)
+        wsgi_file = '/var/www/snackandsurf_pythonanywhere_com_wsgi.py'
+        if os.path.exists(wsgi_file): 
+            os.utime(wsgi_file, None)
+        return 'Site mis a jour avec succes !', 200
+    except Exception as e:
+        return f'Erreur deploy: {str(e)}', 500
 
 if __name__ == '__main__': 
     app.run(debug=True)
