@@ -63,7 +63,7 @@ def privatisation():
 def admin():
     if 'admin_logged_in' not in session:
         if request.method == 'POST':
-            if request.form.get('password') == 'surf':
+            if request.form.get('password') == 'Surf2026*':
                 session['admin_logged_in'] = True
                 return redirect(url_for('admin'))
             return "Mot de passe incorrect", 403
