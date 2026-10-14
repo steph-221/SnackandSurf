@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, redirect, url_for, session
+﻿from flask import Flask, render_template, jsonify, request, redirect, url_for, session
 import sqlite3
 import os
 import subprocess
@@ -230,6 +230,16 @@ def auto_deploy():
     if os.path.exists('/var/www/snackandsurf_pythonanywhere_com_wsgi.py'): 
         os.utime('/var/www/snackandsurf_pythonanywhere_com_wsgi.py', None)
     return 'Site mis a jour', 200
+
+from flask import send_from_directory
+
+@app.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory(app.root_path, request.path[1:])
+
+@app.route('/robots.txt')
+def robots():
+    return send_from_directory(app.root_path, request.path[1:])
 
 if __name__ == '__main__': 
     app.run(debug=True)
