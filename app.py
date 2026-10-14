@@ -40,39 +40,59 @@ def init_db():
     ''')
     cursor = conn.cursor()
     cursor.execute('SELECT COUNT(*) FROM menu')
-    if cursor.fetchone()[0] == 0:
+    current_count = cursor.fetchone()[0]
+    
+    # Si la base est vide ou contient seulement les 2 plats de test initiaux, on réinjecte toute la carte
+    if current_count < 10:
+        conn.execute('DELETE FROM menu')
         plats = [
-            ("Menu du Jour", "Formule du Midi", "2500 FCFA", "Le Plat du Jour au choix (voir l'ardoise)"),
-            ("Snacks", "Hot Dog Crispy", "2000 FCFA", "Saucisse, Mozza, Pate (corn dog), chapelure, oignons crispy. Sauces: Moutarde, Ketchup."),
-            ("Snacks", "Hot Dog New York", "2500 FCFA", "2 Saucisses, choux cuit, oignons caramelises, pain hot dog. Sauces: Mayo, Moutarde, Ketchup."),
-            ("Snacks", "Veggie Burger", "3500 FCFA", "Galette de pois chiche, poelee de champignons, tomate, fromage frais, pain burger, coleslaw."),
-            ("Snacks", "Cheese Burger Steak", "4000 FCFA", "1 Steak, cheddar, oignons caramelises, tomate, roties, pain burger, coleslaw."),
-            ("Snacks", "Corean Wings", "3000 FCFA", "Ailes de poulet croustillantes et dorees a la coreenne."),
-            ("Sides", "Portion de Frites", "1000 FCFA", ""),
-            ("Menus / Combo", "Combo Hot Dog Crispy", "3500 FCFA", "+ FRITES + BOISSON (Sucree, Jus Local ou Eau 0,5L)"),
-            ("Menus / Combo", "Combo Hot Dog New York", "4000 FCFA", "+ FRITES + BOISSON (Sucree, Jus Local ou Eau 0,5L)"),
-            ("Menus / Combo", "Combo Veggie Burger", "5000 FCFA", "+ FRITES + BOISSON (Sucree, Jus Local ou Eau 0,5L)"),
-            ("Menus / Combo", "Combo Cheese Burger Steak", "5500 FCFA", "+ FRITES + BOISSON (Sucree, Jus Local ou Eau 0,5L)"),
-            ("Crepes", "Crepe Sucree", "1500 FCFA", "Crepe douce au sucre fin."),
-            ("Crepes", "Crepe Jambon Fromage", "2500 FCFA", "Jambon savoureux et fromage fondant."),
-            ("Crepes", "Crepe Poulet Champignon Fromage", "3500 FCFA", "Emince de poulet, champignons et fromage fondant."),
-            ("Crepes", "Crepes Veggi Champignons Legumes", "2500 FCFA", "Melange de legumes frais de saison et champignons sautes."),
-            ("Gourmandises", "Gaufre Sucre Glace", "1500 FCFA", ""),
-            ("Gourmandises", "Pancake Spaghetti Nature", "1500 FCFA", ""),
-            ("Gourmandises", "Pancake Nature", "1500 FCFA", ""),
-            ("Gourmandises", "Part de Cake Vanille", "1000 FCFA", ""),
-            ("Gourmandises", "Part de Cake Chocolat", "1500 FCFA", ""),
-            ("Boissons Chaudes", "Cafe American Alonge", "1000 FCFA", ""),
-            ("Boissons Chaudes", "Cafe Expresso", "1500 FCFA", ""),
-            ("Boissons Chaudes", "Cafe Latte", "1500 FCFA", ""),
-            ("Boissons Chaudes", "Infusion / The", "1000 FCFA", ""),
-            ("Boissons Fraiches", "Boissons Sucrees", "1000 FCFA", "Coca, Coca Zero, Sprite, Fanta, Schweppes"),
-            ("Boissons Fraiches", "Jus Locaux", "1000 FCFA", "Bissap, Bouye (selon saison)"),
-            ("Boissons Fraiches", "Eau Casamancaise 1,5L", "1000 FCFA", ""),
-            ("Boissons Fraiches", "Eau Casamancaise 0.5L", "500 FCFA", ""),
-            ("Glaces", "Creamy Fraise / Choco", "1000 FCFA", ""),
-            ("Glaces", "Eskimo Vanille / Fraise", "1000 FCFA", ""),
-            ("Glaces", "Eskimo Choco", "1000 FCFA", "")
+            ('Menu du Jour', 'FORMULE DU MIDI', '2500 FCFA', '✨ Le Plat du Jour au choix (voir l\'ardoise)'),
+            ('Snacks', 'HOT DOG CRISPY', '2000 FCFA', 'Saucisse, Mozza, Pâte (corn dog), chapelure, oignons crispy. Sauces: Moutarde, Ketchup.'),
+            ('Snacks', 'HOT DOG NEW YORK', '2500 FCFA', '2 Saucisses, choux cuit, oignons caramélisés, pain hot dog. Sauces: Mayo, Moutarde, Ketchup.'),
+            ('Snacks', 'VEGGIE BURGER', '3500 FCFA', 'Galette de pois chiche, poêlée de champignons, tomate, fromage frais, pain burger, coleslaw. Sauces: Mayo, Moutarde, Ketchup.'),
+            ('Snacks', 'CHEESE BURGER STEAK', '4000 FCFA', '1 Steak, cheddar, oignons caramélisés, tomate, rôties, pain burger, coleslaw. Sauces: Mayo, Moutarde, Ketchup.'),
+            ('Snacks', 'COREAN WINGS', '3000 FCFA', 'Ailes de poulet croustillantes et dorées à la coréenne.'),
+            ('Snacks - Toppings Burger', '-- Topping Fromage', '500 FCFA', ''),
+            ('Snacks - Toppings Burger', '-- Topping Œuf', '500 FCFA', ''),
+            ('Snacks - Toppings Burger', '-- Topping Steak Sup.', '1000 FCFA', ''),
+            ('Sides', 'PORTION DE FRITES', '1000 FCFA', ''),
+            ('Menus / Combo', 'COMBO HOT DOG CRISPY', '3500 FCFA', '✨ + FRITES + BOISSON (Sucrée, Jus Local ou Eau 0,5L)'),
+            ('Menus / Combo', 'COMBO HOT DOG NEW YORK', '4000 FCFA', '✨ + FRITES + BOISSON (Sucrée, Jus Local ou Eau 0,5L)'),
+            ('Menus / Combo', 'COMBO VEGGIE BURGER', '5000 FCFA', '✨ + FRITES + BOISSON (Sucrée, Jus Local ou Eau 0,5L)'),
+            ('Menus / Combo', 'COMBO CHEESE BURGER STEAK', '5500 FCFA', '✨ + FRITES + BOISSON (Sucrée, Jus Local ou Eau 0,5L)'),
+            ('Crêpes', 'CRÊPE SUCRÉE', '1500 FCFA', 'Crêpe douce au sucre fin.'),
+            ('Crêpes - Toppings', '-- Topping Chantilly', '500 FCFA', ''),
+            ('Crêpes - Toppings', '-- Topping Confitures', '500 FCFA', ''),
+            ('Crêpes - Toppings', '-- Topping Miel', '500 FCFA', ''),
+            ('Crêpes - Toppings', '-- Topping Boule de Glace', '500 FCFA', ''),
+            ('Crêpes - Toppings', '-- Topping Chocolat', '500 FCFA', ''),
+            ('Crêpes - Toppings', '-- Topping Nutella', '1000 FCFA', ''),
+            ('Crêpes', 'CRÊPE JAMBON FROMAGE', '2500 FCFA', 'Jambon savoureux et fromage fondant.'),
+            ('Crêpes', 'CRÊPE POULET CHAMPIGNON FROMAGE', '3500 FCFA', 'Émincé de poulet, champignons et fromage fondant.'),
+            ('Crêpes', 'CRÊPES VEGGI CHAMPIGNONS LÉGUMES', '2500 FCFA', 'Mélange de légumes frais de saison et champignons sautés.'),
+            ('Crêpes - Options Salées', '-- Option Œuf', '500 FCFA', ''),
+            ('Gourmandises / IHOP', 'GAUFRE SUCRE GLACE', '1500 FCFA', ''),
+            ('Gourmandises / IHOP', 'PANCAKE SPAGHETTI NATURE', '1500 FCFA', ''),
+            ('Gourmandises / IHOP', 'PANCAKE NATURE', '1500 FCFA', ''),
+            ('Gourmandises - Toppings', '-- Topping Chantilly', '500 FCFA', ''),
+            ('Gourmandises - Toppings', '-- Topping Confitures', '500 FCFA', ''),
+            ('Gourmandises - Toppings', '-- Topping Miel', '500 FCFA', ''),
+            ('Gourmandises - Toppings', '-- Topping Boule de Glace', '500 FCFA', ''),
+            ('Gourmandises - Toppings', '-- Topping Chocolat', '500 FCFA', ''),
+            ('Gourmandises - Toppings', '-- Topping Nutella', '1000 FCFA', ''),
+            ('Gourmandises / IHOP', 'PART DE CAKE VANILLE', '1000 FCFA', ''),
+            ('Gourmandises / IHOP', 'PART DE CAKE CHOCOLAT', '1500 FCFA', ''),
+            ('Boissons Chaudes', 'CAFÉ AMERICAN ALONGÉ', '1000 FCFA', ''),
+            ('Boissons Chaudes', 'CAFÉ EXPRESSO', '1500 FCFA', ''),
+            ('Boissons Chaudes', 'CAFÉ LATTE', '1500 FCFA', ''),
+            ('Boissons Chaudes', 'INFUSION / THÉ', '1000 FCFA', ''),
+            ('Boissons Fraîches', 'BOISSONS SUCRÉES', '1000 FCFA', 'Coca, Coca Zéro, Sprite, Fanta, Schweppes'),
+            ('Boissons Fraîches', 'JUS LOCAUX', '1000 FCFA', 'Bissap, Bouye (selon saison)'),
+            ('Boissons Fraîches', 'EAU CASAMANCAISE 1,5L', '1000 FCFA', ''),
+            ('Boissons Fraîches', 'EAU CASAMANCAISE 0.5L', '500 FCFA', ''),
+            ('Glaces', 'CREAMY FRAISE / CHOCO', '1000 FCFA', ''),
+            ('Glaces', 'ESKIMO VANILLE / FRAISE', '1000 FCFA', ''),
+            ('Glaces', 'ESKIMO CHOCO', '1000 FCFA', '')
         ]
         cursor.executemany('INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)', plats)
         conn.commit()
@@ -87,7 +107,7 @@ def accueil():
 @app.route('/api/menu')
 def get_menu():
     conn = get_db_connection()
-    plats = conn.execute('SELECT * FROM menu ORDER BY categorie').fetchall()
+    plats = conn.execute('SELECT * FROM menu ORDER BY id').fetchall()
     conn.close()
     menu = {}
     for p in plats:
@@ -137,7 +157,7 @@ def admin():
             return "Mot de passe incorrect", 403
         return render_template('admin_login.html')
     conn = get_db_connection()
-    plats = conn.execute('SELECT * FROM menu ORDER BY categorie').fetchall()
+    plats = conn.execute('SELECT * FROM menu ORDER BY id').fetchall()
     reservations = conn.execute('SELECT * FROM reservations ORDER BY date_demande DESC').fetchall()
     conn.close()
     return render_template('admin.html', plats=plats, reservations=reservations)

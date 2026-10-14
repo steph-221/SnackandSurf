@@ -1,74 +1,9 @@
-﻿<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Snack & Surf - Edition Teranga</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Permanent+Marker&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --senegal-green: #00853F;
-            --senegal-yellow: #FDEF42;
-            --senegal-red: #E31B23;
-            --ocean-blue: #48CAE4;
-            --text-dark: #1a1a1a;
-            --text-muted: #555555;
-        }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #e0f7fa 0%, #80deea 100%);
-            background-attachment: fixed;
-            min-height: 100vh;
-            color: var(--text-dark);
-        }
-        .main-title { font-family: 'Permanent Marker', cursive; text-shadow: 2px 2px 0px var(--senegal-green); color: var(--senegal-red); transform: rotate(-2deg); }
-        .sub-title { font-family: 'Permanent Marker', cursive; color: var(--senegal-green); letter-spacing: 1px; }
-        .card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 1.5rem; box-shadow: 0 10px 25px rgba(0, 133, 63, 0.15); padding: 2rem 1.5rem; margin: 2rem auto; max-width: 750px; border: 2px solid #fff; position: relative; overflow: hidden; }
-        .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px; background: repeating-linear-gradient(90deg, var(--senegal-green), var(--senegal-green) 33.3%, var(--senegal-yellow) 33.3%, var(--senegal-yellow) 66.6%, var(--senegal-red) 66.6%, var(--senegal-red) 100%); background-size: 100% 100%; }
-        .section-title { font-family: 'Permanent Marker', cursive; position: relative; color: var(--senegal-green); font-size: 2rem; padding-bottom: 1rem; display: flex; align-items: center; justify-content: center; margin-top: 2rem; }
-        .section-title::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 80px; height: 4px; background-color: var(--senegal-yellow); border-radius: 2px; box-shadow: 0 2px 0 var(--senegal-red); }
-        .menu-item-block { padding-top: 0.75rem; margin-bottom: 0; border-bottom: 1px dashed #ccc; }
-        .item-row { display: flex; justify-content: space-between; align-items: flex-end; }
-        .item-name-dots { display: flex; flex-grow: 1; overflow: hidden; align-items: flex-end; }
-        .dots-separator { flex-grow: 1; min-width: 10px; margin: 0 0.5rem; border-bottom: 2px dotted #aaa; height: 1em; }
-        .item-name { font-weight: 700; color: #222; font-size: 1.1rem; line-height: 1.4; display: block; flex-shrink: 1; }
-        .item-price { font-family: 'Permanent Marker', cursive; color: var(--senegal-red); font-size: 1.25rem; flex-shrink: 0; margin-left: 1rem; }
-        .item-ingredients { color: var(--text-muted); font-style: italic; font-size: 0.9rem; margin-top: 0.25rem; margin-bottom: 0.75rem; padding-left: 0.5rem; line-height: 1.3; }
-        @media (max-width: 640px) { .section-title { font-size: 1.75rem; } }
-    </style>
-</head>
-<body class="p-4 sm:p-8">
-
-    <div class="fixed top-4 left-4 z-50 flex gap-2">
-        <a href="/admin" class="bg-gray-800 text-white text-xs font-bold px-3 py-2 rounded opacity-50 hover:opacity-100 transition">Admin</a>
-        <a href="/privatisation" class="bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded shadow-md">Privatiser</a>
-    </div>
-
-    <div class="text-center mb-6 mt-8">
-        <h1 class="main-title text-5xl sm:text-6xl font-extrabold tracking-wider relative inline-block">LA CARTE</h1>
-    </div>
-
-    <div class="card">
-        <div class="w-full flex justify-center mb-8 pt-4">
-            <img src="https://drive.google.com/thumbnail?id=1ffuCBqJBhUMZF1akm5_CL7_txgfaJF2m&sz=w1000" alt="Logo Snack & Surf" class="max-w-[250px] sm:max-w-[300px] h-auto drop-shadow-md">
-        </div>
-
-        <div id="dynamic-menu-container"></div>
-
-        <div class="w-full mt-12 mb-6 rounded-xl overflow-
-
-$Utf8 = [System.Text.Encoding]::UTF8
-
-$indexHtml = @'
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Snack & Surf - Edition Teranga</title>
+    <title>Menu Snack & Surf - Édition Teranga</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -82,6 +17,7 @@ $indexHtml = @'
             --text-dark: #1a1a1a;
             --text-muted: #555555;
         }
+
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #e0f7fa 0%, #80deea 100%);
@@ -89,69 +25,285 @@ $indexHtml = @'
             min-height: 100vh;
             color: var(--text-dark);
         }
-        .main-title { font-family: 'Permanent Marker', cursive; text-shadow: 2px 2px 0px var(--senegal-green); color: var(--senegal-red); transform: rotate(-2deg); }
-        .sub-title { font-family: 'Permanent Marker', cursive; color: var(--senegal-green); letter-spacing: 1px; }
-        .card { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 1.5rem; box-shadow: 0 10px 25px rgba(0, 133, 63, 0.15); padding: 2rem 1.5rem; margin: 2rem auto; max-width: 750px; border: 2px solid #fff; position: relative; overflow: hidden; }
-        .card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 12px; background: repeating-linear-gradient(90deg, var(--senegal-green), var(--senegal-green) 33.3%, var(--senegal-yellow) 33.3%, var(--senegal-yellow) 66.6%, var(--senegal-red) 66.6%, var(--senegal-red) 100%); background-size: 100% 100%; }
-        .section-title { font-family: 'Permanent Marker', cursive; position: relative; color: var(--senegal-green); font-size: 2rem; padding-bottom: 1rem; display: flex; align-items: center; justify-content: center; margin-top: 2rem; }
-        .section-title::after { content: ''; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); width: 80px; height: 4px; background-color: var(--senegal-yellow); border-radius: 2px; box-shadow: 0 2px 0 var(--senegal-red); }
-        .menu-item-block { padding-top: 0.75rem; margin-bottom: 0; border-bottom: 1px dashed #ccc; }
-        .item-row { display: flex; justify-content: space-between; align-items: flex-end; }
-        .item-name-dots { display: flex; flex-grow: 1; overflow: hidden; align-items: flex-end; }
-        .dots-separator { flex-grow: 1; min-width: 10px; margin: 0 0.5rem; border-bottom: 2px dotted #aaa; height: 1em; }
-        .item-name { font-weight: 700; color: #222; font-size: 1.1rem; line-height: 1.4; display: block; flex-shrink: 1; }
-        .item-price { font-family: 'Permanent Marker', cursive; color: var(--senegal-red); font-size: 1.25rem; flex-shrink: 0; margin-left: 1rem; }
-        .item-ingredients { color: var(--text-muted); font-style: italic; font-size: 0.9rem; margin-top: 0.25rem; margin-bottom: 0.75rem; padding-left: 0.5rem; line-height: 1.3; }
-        @media (max-width: 640px) { .section-title { font-size: 1.75rem; } }
+
+        .main-title {
+            font-family: 'Permanent Marker', cursive;
+            text-shadow: 2px 2px 0px var(--senegal-green);
+            color: var(--senegal-red);
+            transform: rotate(-2deg); 
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0, 133, 63, 0.15); 
+            padding: 2rem 1.5rem;
+            margin: 2rem auto;
+            max-width: 750px;
+            border: 2px solid #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: repeating-linear-gradient(
+                90deg,
+                var(--senegal-green),
+                var(--senegal-green) 33.3%,
+                var(--senegal-yellow) 33.3%,
+                var(--senegal-yellow) 66.6%,
+                var(--senegal-red) 66.6%,
+                var(--senegal-red) 100%
+            );
+            background-size: 100% 100%;
+        }
+
+        .section-title {
+            font-family: 'Permanent Marker', cursive;
+            position: relative;
+            color: var(--senegal-green);
+            font-size: 2rem; 
+            padding-bottom: 0.75rem; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--senegal-yellow);
+            border-radius: 2px;
+            box-shadow: 0 2px 0 var(--senegal-red);
+        }
+
+        .menu-item-block {
+            padding-top: 0.75rem;
+            margin-bottom: 0; 
+            border-bottom: 1px dashed #ccc; 
+        }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 0; 
+            padding-bottom: 0; 
+            padding-top: 0; 
+            border-bottom: none; 
+        }
+
+        .item-name-dots {
+            display: flex;
+            flex-grow: 1; 
+            overflow: hidden; 
+            align-items: flex-end;
+        }
+
+        .dots-separator {
+            flex-grow: 1;
+            min-width: 10px; 
+            margin: 0 0.5rem;
+            border-bottom: 2px dotted #aaa; 
+            height: 1em; 
+        }
+
+        .item-name {
+            font-weight: 700;
+            color: #222;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            display: block; 
+            flex-shrink: 1; 
+        }
+
+        .item-price {
+            font-family: 'Permanent Marker', cursive; 
+            color: var(--senegal-red);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .item-ingredients {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.75rem;
+            padding-left: 0.5rem;
+            line-height: 1.3;
+            text-align: left;
+        }
+
+        .combo-description {
+            color: #000;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.75rem;
+            padding-left: 0.5rem;
+            line-height: 1.3;
+            background-color: #fffde7; 
+            border-left: 4px solid var(--senegal-yellow);
+            padding: 0.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            display: block;
+            text-align: left;
+        }
+
+        .topping-row {
+            padding-top: 0.25rem !important;
+            padding-bottom: 0.25rem !important;
+            border-bottom: none !important;
+        }
+
+        .topping-text {
+            font-style: italic;
+            color: var(--text-muted);
+            margin-left: 1.5rem; 
+            font-weight: 400;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+        }
+
+        .topping-price {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif; 
+        }
+
+        @media (max-width: 640px) {
+            .section-title {
+                font-size: 1.75rem;
+            }
+        }
     </style>
 </head>
 <body class="p-4 sm:p-8">
 
+    <!-- Boutons fixes Admin & Privatisation -->
     <div class="fixed top-4 left-4 z-50 flex gap-2">
-        <a href="/admin" class="bg-gray-800 text-white text-xs font-bold px-3 py-2 rounded opacity-50 hover:opacity-100 transition">Admin</a>
-        <a href="/privatisation" class="bg-blue-600 text-white text-xs font-bold px-3 py-2 rounded shadow-md">Privatiser</a>
+        <a href="/admin" class="bg-gray-800 text-white text-xs font-bold px-3 py-2 rounded opacity-75 hover:opacity-100 transition shadow">Admin</a>
+        <a href="/privatisation" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded shadow-md transition">Privatiser</a>
     </div>
 
+    <!-- Titre Principal -->
     <div class="text-center mb-6 mt-8">
-        <h1 class="main-title text-5xl sm:text-6xl font-extrabold tracking-wider relative inline-block">LA CARTE</h1>
+        <h1 class="main-title text-5xl sm:text-6xl font-extrabold tracking-wider relative inline-block">
+            LA CARTE
+            <span style="color: var(--senegal-yellow); position: absolute; top: -10px; right: -20px; text-shadow: 1px 1px 0 #000;">★</span>
+        </h1>
     </div>
 
+    <!-- Carte Conteneur -->
     <div class="card">
+        
+        <!-- Logo -->
         <div class="w-full flex justify-center mb-8 pt-4">
-            <img src="https://drive.google.com/thumbnail?id=1ffuCBqJBhUMZF1akm5_CL7_txgfaJF2m&sz=w1000" alt="Logo Snack & Surf" class="max-w-[250px] sm:max-w-[300px] h-auto drop-shadow-md">
+            <img src="https://drive.google.com/thumbnail?id=1ffuCBqJBhUMZF1akm5_CL7_txgfaJF2m&sz=w1000" alt="Logo Snack & Surf" class="max-w-[250px] sm:max-w-[300px] h-auto drop-shadow-md transform hover:scale-105 transition duration-300">
         </div>
 
-        <div id="dynamic-menu-container"></div>
-
-        <div class="w-full mt-12 mb-6 rounded-xl overflow-hidden shadow-lg border-4 border-white">
-            <img src="https://drive.google.com/thumbnail?id=1SJEYqCftp8I90e15AeBH2guhAsDHwh3x&sz=w1000" alt="Snack & Surf Facade" class="w-full h-auto object-cover">
+        <!-- Contenu dynamique du menu chargé par JS -->
+        <div id="dynamic-menu-container">
+            <div class="text-center py-12 text-gray-400">
+                <span class="inline-block animate-spin mr-2">🏄‍♂️</span> Chargement de la carte...
+            </div>
         </div>
 
+        <!-- Photo de la Façade -->
+        <div class="w-full mt-12 mb-6 rounded-xl overflow-hidden shadow-lg border-4 border-white transform hover:rotate-1 transition duration-500">
+            <img src="https://drive.google.com/thumbnail?id=1SJEYqCftp8I90e15AeBH2guhAsDHwh3x&sz=w1000" alt="Snack & Surf Façade" class="w-full h-auto object-cover">
+        </div>
+
+        <!-- Pied de carte -->
         <div class="text-center pt-4 border-t-2 border-dashed" style="border-color: var(--senegal-red);">
-            <p class="text-sm mt-1 font-bold tracking-wider uppercase" style="color: var(--senegal-green);">Commande au Comptoir</p>
+            <p class="text-sm mt-1 font-bold tracking-wider uppercase" style="color: var(--senegal-green);">
+                Commande au Comptoir 🤙
+            </p>
         </div>
+
     </div>
 
-    <!-- BOUTON WHATSAPP FLOTTANT -->
+    <!-- Bouton WhatsApp Flottant -->
     <a href="https://wa.me/221710579371?text=Bonjour%20Snack%20%26%20Surf%2C%20je%20souhaite%20passer%20commande%20!" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-3 px-5 rounded-full shadow-2xl transition-all transform hover:scale-105">
         <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.679-.702c.97.529 1.838.783 2.78.783h.001c3.182 0 5.768-2.587 5.769-5.766.001-3.182-2.585-5.767-5.769-5.767zm7.551 5.766c-.001 4.165-3.39 7.554-7.553 7.554-1.259 0-2.438-.328-3.486-.902l-4.543 1.19 1.213-4.431c-.655-1.084-1.024-2.353-1.024-3.411.001-4.165 3.39-7.554 7.553-7.554 4.164 0 7.553 3.389 7.554 7.554zm-4.708 2.062c-.21-.105-1.242-.613-1.434-.683-.193-.07-.333-.105-.473.105-.14.21-.543.683-.666.823-.122.14-.245.158-.455.053-.21-.105-.888-.327-1.691-1.043-.625-.558-1.047-1.247-1.17-1.457-.122-.21-.013-.324.092-.428.095-.094.21-.245.315-.368.105-.123.14-.21.21-.35.07-.14.035-.263-.018-.368-.053-.105-.473-1.14-.648-1.56-.17-.41-.344-.354-.473-.36-.122-.006-.263-.007-.403-.007-.14 0-.368.053-.56.263-.193.21-.736.719-.736 1.753s.753 2.033.858 2.173c.105.14 1.482 2.263 3.59 3.173.501.217.892.346 1.197.443.503.16 1.012.137 1.393.08.425-.064 1.242-.508 1.417-.999.175-.49.175-.91.122-.999-.052-.088-.192-.14-.402-.245z"/></svg>
         <span class="font-medium text-sm">WhatsApp</span>
     </a>
 
+    <!-- Chargement dynamique de la carte -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            fetch('/api/menu').then(response => response.json()).then(data => {
-                const container = document.getElementById('dynamic-menu-container');
-                data.forEach(categorie => {
-                    let html = `<div class="text-center mb-8"><h2 class="section-title uppercase">`+categorie.categorie+`</h2><div class="space-y-2">`;
-                    categorie.items.forEach(item => {
-                        let descHtml = item.desc ? `<p class="item-ingredients text-left bg-[#fffde7] border-l-4 border-[#FDEF42] p-2 mt-1 mb-2 rounded-r">`+item.desc+`</p>` : '';
-                        html += `<div class="menu-item-block"><div class="item-row"><div class="item-name-dots"><span class="item-name uppercase">`+item.nom+`</span><div class="dots-separator"></div></div><span class="item-price">`+item.prix+`</span></div>`+descHtml+`</div>`;
+            fetch('/api/menu')
+                .then(response => response.json())
+                .then(data => {
+                    const container = document.getElementById('dynamic-menu-container');
+                    let fullHtml = '';
+                    
+                    data.forEach(categorie => {
+                        let catHtml = `<div class="text-center mb-10">`;
+                        catHtml += `<h2 class="section-title uppercase mb-6">${categorie.categorie}</h2>`;
+                        catHtml += `<div class="space-y-1">`;
+                        
+                        categorie.items.forEach(item => {
+                            const isTopping = item.nom.startsWith('--');
+                            if (isTopping) {
+                                catHtml += `
+                                    <div class="item-row topping-row">
+                                        <div class="item-name-dots">
+                                            <span class="topping-text">${item.nom}</span>
+                                            <div class="dots-separator" style="border-bottom-color: #cbd5e1;"></div>
+                                        </div>
+                                        <span class="topping-price">${item.prix}</span>
+                                    </div>
+                                `;
+                            } else {
+                                let descHtml = '';
+                                if (item.desc && item.desc.trim().length > 0) {
+                                    if (item.desc.includes('✨') || item.desc.includes('+ FRITES')) {
+                                        descHtml = `<p class="combo-description">${item.desc}</p>`;
+                                    } else {
+                                        descHtml = `<p class="item-ingredients">${item.desc}</p>`;
+                                    }
+                                }
+                                catHtml += `
+                                    <div class="menu-item-block">
+                                        <div class="item-row">
+                                            <div class="item-name-dots">
+                                                <span class="item-name uppercase">${item.nom}</span>
+                                                <div class="dots-separator"></div>
+                                            </div>
+                                            <span class="item-price">${item.prix}</span>
+                                        </div>
+                                        ${descHtml}
+                                    </div>
+                                `;
+                            }
+                        });
+                        
+                        catHtml += `</div></div>`;
+                        fullHtml += catHtml;
                     });
-                    html += `</div></div>`;
-                    container.innerHTML += html;
+                    
+                    container.innerHTML = fullHtml;
+                })
+                .catch(err => {
+                    console.error('Erreur chargement menu:', err);
+                    document.getElementById('dynamic-menu-container').innerHTML = '<p class="text-center text-red-500">Erreur de chargement de la carte.</p>';
                 });
-            });
         });
     </script>
 </body>
