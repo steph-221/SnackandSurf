@@ -1,0 +1,284 @@
+[
+ {
+  "categorie": "Menu du Jour",
+  "nom": "FORMULE DU MIDI",
+  "prix": "2500 FCFA",
+  "description": "✨ Le Plat du Jour au choix (voir l'ardoise)"
+ },
+ {
+  "categorie": "Snacks",
+  "nom": "HOT DOG CRISPY",
+  "prix": "2000 FCFA",
+  "description": "Saucisse, Mozza, Pâte (corn dog), chapelure, oignons crispy. Sauces: Moutarde, Ketchup."
+ },
+ {
+  "categorie": "Snacks",
+  "nom": "HOT DOG NEW YORK",
+  "prix": "2500 FCFA",
+  "description": "2 Saucisses, choux cuit, oignons caramélisés, pain hot dog. Sauces: Mayo, Moutarde, Ketchup."
+ },
+ {
+  "categorie": "Snacks",
+  "nom": "VEGGIE BURGER",
+  "prix": "3500 FCFA",
+  "description": "Galette de pois chiche, poêlée de champignons, tomate, fromage frais, pain burger, coleslaw. Sauces: Mayo, Moutarde, Ketchup."
+ },
+ {
+  "categorie": "Snacks",
+  "nom": "CHEESE BURGER STEAK",
+  "prix": "4000 FCFA",
+  "description": "1 Steak, cheddar, oignons caramélisés, tomate, rôties, pain burger, coleslaw. Sauces: Mayo, Moutarde, Ketchup."
+ },
+ {
+  "categorie": "Snacks",
+  "nom": "COREAN WINGS",
+  "prix": "3000 FCFA",
+  "description": "Ailes de poulet croustillantes et dorées à la coréenne."
+ },
+ {
+  "categorie": "Snacks - Toppings Burger",
+  "nom": "-- Topping Fromage",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Snacks - Toppings Burger",
+  "nom": "-- Topping Œuf",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Snacks - Toppings Burger",
+  "nom": "-- Topping Steak Sup.",
+  "prix": "1000 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Sides",
+  "nom": "PORTION DE FRITES",
+  "prix": "1000 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Menus / Combo",
+  "nom": "COMBO HOT DOG CRISPY",
+  "prix": "3500 FCFA",
+  "description": "✨ + FRITES + BOISSON (Sucrée, Jus Local ou Eau 0,5L)"
+ },
+ {
+  "categorie": "Menus / Combo",
+  "nom": "COMBO HOT DOG NEW YORK",
+  "prix": "4000 FCFA",
+  "description": "✨ + FRITES + BOISSON (Sucrée, Jus Local ou Eau 0,5L)"
+ },
+ {
+  "categorie": "Menus / Combo",
+  "nom": "COMBO VEGGIE BURGER",
+  "prix": "5000 FCFA",
+  "description": "✨ + FRITES + BOISSON (Sucrée, Jus Local ou Eau 0,5L)"
+ },
+ {
+  "categorie": "Menus / Combo",
+  "nom": "COMBO CHEESE BURGER STEAK",
+  "prix": "5500 FCFA",
+  "description": "✨ + FRITES + BOISSON (Sucrée, Jus Local ou Eau 0,5L)"
+ },
+ {
+  "categorie": "Crêpes",
+  "nom": "CRÊPE SUCRÉE",
+  "prix": "1500 FCFA",
+  "description": "Crêpe douce au sucre fin."
+ },
+ {
+  "categorie": "Crêpes - Toppings",
+  "nom": "-- Topping Chantilly",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Crêpes - Toppings",
+  "nom": "-- Topping Confitures",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Crêpes - Toppings",
+  "nom": "-- Topping Miel",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Crêpes - Toppings",
+  "nom": "-- Topping Boule de Glace",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Crêpes - Toppings",
+  "nom": "-- Topping Chocolat",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Crêpes - Toppings",
+  "nom": "-- Topping Nutella",
+  "prix": "1000 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Crêpes",
+  "nom": "CRÊPE JAMBON FROMAGE",
+  "prix": "2500 FCFA",
+  "description": "Jambon savoureux et fromage fondant."
+ },
+ {
+  "categorie": "Crêpes",
+  "nom": "CRÊPE POULET CHAMPIGNON FROMAGE",
+  "prix": "3500 FCFA",
+  "description": "Émincé de poulet, champignons et fromage fondant."
+ },
+ {
+  "categorie": "Crêpes",
+  "nom": "CRÊPES VEGGI CHAMPIGNONS LÉGUMES",
+  "prix": "2500 FCFA",
+  "description": "Mélange de légumes frais de saison et champignons sautés."
+ },
+ {
+  "categorie": "Crêpes - Options Salées",
+  "nom": "-- Option Œuf",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Gourmandises / IHOP",
+  "nom": "GAUFRE SUCRE GLACE",
+  "prix": "1500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Gourmandises / IHOP",
+  "nom": "PANCAKE SPAGHETTI NATURE",
+  "prix": "1500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Gourmandises / IHOP",
+  "nom": "PANCAKE NATURE",
+  "prix": "1500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Gourmandises - Toppings",
+  "nom": "-- Topping Chantilly",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Gourmandises - Toppings",
+  "nom": "-- Topping Confitures",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Gourmandises - Toppings",
+  "nom": "-- Topping Miel",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Gourmandises - Toppings",
+  "nom": "-- Topping Boule de Glace",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Gourmandises - Toppings",
+  "nom": "-- Topping Chocolat",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Gourmandises - Toppings",
+  "nom": "-- Topping Nutella",
+  "prix": "1000 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Gourmandises / IHOP",
+  "nom": "PART DE CAKE VANILLE",
+  "prix": "1000 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Gourmandises / IHOP",
+  "nom": "PART DE CAKE CHOCOLAT",
+  "prix": "1500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Boissons Chaudes",
+  "nom": "CAFÉ AMERICAN ALONGÉ",
+  "prix": "1000 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Boissons Chaudes",
+  "nom": "CAFÉ EXPRESSO",
+  "prix": "1500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Boissons Chaudes",
+  "nom": "CAFÉ LATTE",
+  "prix": "1500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Boissons Chaudes",
+  "nom": "INFUSION / THÉ",
+  "prix": "1000 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Boissons Fraîches",
+  "nom": "BOISSONS SUCRÉES",
+  "prix": "1000 FCFA",
+  "description": "Coca, Coca Zéro, Sprite, Fanta, Schweppes"
+ },
+ {
+  "categorie": "Boissons Fraîches",
+  "nom": "JUS LOCAUX",
+  "prix": "1000 FCFA",
+  "description": "Bissap, Bouye (selon saison)"
+ },
+ {
+  "categorie": "Boissons Fraîches",
+  "nom": "EAU CASAMANCAISE 1,5L",
+  "prix": "1000 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Boissons Fraîches",
+  "nom": "EAU CASAMANCAISE 0.5L",
+  "prix": "500 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Glaces",
+  "nom": "CREAMY FRAISE / CHOCO",
+  "prix": "1000 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Glaces",
+  "nom": "ESKIMO VANILLE / FRAISE",
+  "prix": "1000 FCFA",
+  "description": ""
+ },
+ {
+  "categorie": "Glaces",
+  "nom": "ESKIMO CHOCO",
+  "prix": "1000 FCFA",
+  "description": ""
+ }
+]
