@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, request, redirect, url_for, session, send_from_directory
 import sqlite3
+import json
 import os
 import subprocess
 from datetime import datetime
@@ -66,14 +67,40 @@ def get_db_connection():
     conn.row_factory = sqlite3.Row
     return conn
 
-# Script pour ajouter la colonne 'message' si elle n'existe pas
+SEED_FILE = os.path.join(BASE_DIR, 'menu_seed.json')
+
+# Cree les tables si besoin et remplit la carte depuis menu_seed.json quand elle est vide
 def upgrade_db():
     conn = get_db_connection()
     try:
-        conn.execute('ALTER TABLE reservations ADD COLUMN message TEXT')
+        conn.execute('''CREATE TABLE IF NOT EXISTS menu (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            categorie TEXT NOT NULL,
+            nom TEXT NOT NULL,
+            prix TEXT NOT NULL,
+            description TEXT
+        )''')
+        conn.execute('''CREATE TABLE IF NOT EXISTS reservations (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            date_demande TEXT NOT NULL,
+            nom TEXT NOT NULL,
+            contact TEXT NOT NULL,
+            date_event TEXT NOT NULL,
+            personnes INTEGER NOT NULL,
+            type_event TEXT NOT NULL,
+            statut TEXT DEFAULT 'En attente',
+            message TEXT
+        )''')
+        try:
+            conn.execute('ALTER TABLE reservations ADD COLUMN message TEXT')
+        except sqlite3.OperationalError:
+            pass # La colonne existe deja
+        if conn.execute('SELECT COUNT(*) FROM menu').fetchone()[0] == 0 and os.path.exists(SEED_FILE):
+            with open(SEED_FILE, encoding='utf-8') as f:
+                for p in json.load(f):
+                    conn.execute('INSERT INTO menu (categorie, nom, prix, description) VALUES (?, ?, ?, ?)',
+                                 (p['categorie'], p['nom'], p['prix'], p['description']))
         conn.commit()
-    except sqlite3.OperationalError:
-        pass # La colonne existe déjà
     finally:
         conn.close()
 
